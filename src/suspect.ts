@@ -171,16 +171,16 @@ export class SpawnChain {
 
       if (!lastLine) {
         onError(new AssertionError({
-          actual: remainingQueue.map((fn) => fn.description),
-          expected: [],
-          message: `No data from child with non-empty queue.`,
+          actual: [],
+          expected: remainingQueue.map((fn) => fn.description),
+          message: `Child exited with no output.`,
         }));
         return false;
       } else if (self.queue.length > 0) {
         onError(new AssertionError({
-          actual: remainingQueue.map((fn) => fn.description),
-          expected: [],
-          message: `Non-empty queue on spawn exit.`,
+          actual: [],
+          expected: remainingQueue.map((fn) => fn.description),
+          message: `Expecting more output when child exited.`,
         }));
         return false;
       } else if (currentFn && currentFn.type === "sendline") {
